@@ -33,7 +33,15 @@ pip install -r requirements.txt
 
 ## collect_underpants.py
 
-The primary function in collect_underpants.py is collect_underpants(). The function takes one argument: a valid URL. All supporting functions are called as a result of running collect_underpants(). If used in other applications, this would be the function to import. A simple argparse has been written in __main__ and a shebang for Python3 is included in the file. You can collect underpants by executing collect_underpants.py and supplying a URL.
+The primary function in collect_underpants.py is collect_underpants(). The function 
+takes one argument: a valid URL. All supporting functions are called as a result of 
+running collect_underpants(). If used in other applications, this would be the 
+function to import. A simple argparse has been written in __main__ and a shebang for 
+Python3 is included in the file.
+
+### Basic Usage
+
+You can collect underpants by executing collect_underpants.py and supplying a URL.
 
 ```shell
 (env) $ ./collect_underpants.py https://realpython.github.io/fake-jobs/
@@ -52,4 +60,23 @@ realpython.github.io
 
 (env) $ cat underpants/realpython.github.io
 set()
+```
+
+### Raised Exceptions
+
+The first exception relies on validators to determine if the supplied URL is
+valid or not. If an invalid URL is provided, then a **ValueError** is raised
+indicating the input URL should match the provided regex. Basically, the URL
+should begin with http:// or https:// and contain a valid domain.
+
+```shell
+ValueError: Input URL should match regex https?://[^.]*.[a-z]*/?.*
+```
+
+If the target has already been collected, then a **FileExistsError** is raised.
+In the event you wish to refresh the contents of this file, simply rename or
+delete the existing file.
+
+```shell
+FileExistsError: These underpants have already been collected!
 ```
