@@ -1,4 +1,4 @@
-# collect-underpants
+# gnomes
 
 Gnomes is a collection of programs to aid in web scraping. The project is inspired by the South Park episode, “Gnomes.” Expect more modules inspired by the Gnomes’ three-phased business plan.
 
