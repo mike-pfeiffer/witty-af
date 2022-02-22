@@ -160,7 +160,8 @@ def collect_underpants(target):
         raise ValueError(errmsg)
 
     if is_collected(target):
-        return "These underpants have been collected!"
+        errmsg = "These underpants have already been collected!"
+        raise FileExistsError(errmsg)
 
     links = set()
     urls = parse_links(target, target)
