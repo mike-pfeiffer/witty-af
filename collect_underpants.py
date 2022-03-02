@@ -127,10 +127,8 @@ def parse_links(url, target):
 
 
 def store_underpants(underpants, target):
-    base = urlparse(target)
-    netloc = base.netloc
     folder = f"{os.getcwd()}/{FOLDER}"
-    filename = f"{folder}/{netloc}"
+    filename = f"{folder}/{return_filename(target)}"
     folder_exists = os.path.exists(folder)
 
     if not folder_exists:
@@ -141,16 +139,26 @@ def store_underpants(underpants, target):
 
 
 def is_collected(target):
-    base = urlparse(target)
-    netloc = base.netloc
     folder = f"{os.getcwd()}/{FOLDER}"
-    filename = f"{folder}/{netloc}"
+    filename = f"{folder}/{return_filename(target)}"
     file_exists = os.path.isfile(filename)
 
     if file_exists:
         return True
     else:
         return False
+
+
+def return_filename(target):
+    base = urlparse(target)
+    netloc = base.netloc
+    path = base.path
+
+    if len(path) > 1:
+        path = path.replace("/", "_")
+        return f"{netloc}{path}"
+    else:
+        return f"{netloc}"
 
 
 def collect_underpants(target):
@@ -180,9 +188,13 @@ def collect_underpants(target):
         gnomes(temp)
 
     gnomes(urls)
-    store_underpants(links, target)
 
-    return links
+    if len(links) > 0:
+        store_underpants(links, target)
+        return links
+    else:
+        errmsg = "No additional links were discovered!"
+        raise ValueError(errmsg)
 
 
 if __name__ == "__main__":
