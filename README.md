@@ -1,11 +1,11 @@
-# gnomes
+# witty-af
 
-Gnomes is a collection of programs to aid in web scraping. The project is inspired by the South Park episode, “Gnomes.” Expect more modules inspired by the Gnomes’ three-phased business plan.
+Web in TTY Adept Finder is a command-line utility for improving searching sites.
 
 ## Getting Started
 
-This project is being developed on the server edition of [Ubuntu 20.04.3
-LTS](https://releases.ubuntu.com/20.04/) and written in Python3.
+This project is being developed on the server edition of [Ubuntu 22.04.3 
+LTS](https://releases.ubuntu.com/22.04/) and written in Python3.
 
 ### Direct on Host
 
@@ -31,34 +31,34 @@ python3 -m venv env
 pip install -r requirements.txt
 ```
 
-## collect_underpants.py
+## gather_urls.py
 
-The primary function in collect_underpants.py is collect_underpants(). The function
+The primary function in gather_urls.py is gather_urls(). The function
 takes one argument: a valid URL. All supporting functions are called as a result of
-running collect_underpants(). If used in other applications, this would be the
+running gather_urls(). If used in other applications, this would be the
 function to import. A simple argparse has been written in __main__ and a shebang for
 Python3 is included in the file.
 
 ### Basic Usage
 
-You can collect underpants by executing collect_underpants.py and supplying a URL.
+You can enumerate URLs from a single page by executing gather_urls.py and supplying a URL.
 
 ```shell
-python3 collect_underpants.py https://webscraper.io/test-sites/e-commerce/allinone
+python3 gather_urls.py https://webscraper.io/test-sites/e-commerce/allinone
 ```
 
 After all possible URLs have been parsed from the seed URL, a set is output to
-folder **underpants**. If this folder does not exist, the program will create it
+folder **urls**. If this folder does not exist, the program will create it
 for you and store the output in a file named after the seed URL. The example
 below will show you the created folder and file. The output in the file is empty
 as the target URL provides no new URLs from the seed.
 
 ```shell
-ls underpants/
+ls urls/
 ```
 
 ```shell
-more underpants/webscraper.io_test-sites_e-commerce_allinone
+more urls/webscraper.io_test-sites_e-commerce_allinone
 ```
 
 ### Raised Exceptions
@@ -77,7 +77,7 @@ In the event you wish to refresh the contents of this file, simply rename or
 delete the existing file.
 
 ```shell
-FileExistsError: These underpants have already been collected!
+FileExistsError: These urls have already been collected!
 ```
 
 Another **ValueError** is raised when the supplied URL returns 0 new links. This

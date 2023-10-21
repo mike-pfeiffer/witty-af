@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-collect_underpants.py gathers more URLs from a single seed URL.
+gather_urls.py gathers more URLs from a single seed URL.
 Copyright (C) 2022 Mike Pfeiffer
 
 This program is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse, urlunparse
 
 FORMAT = "https?://[^.]*.[a-z]*/?.*"
-FOLDER = "underpants"
+FOLDER = "urls"
 USER_AGENT = (
     "Mozilla/5.0 (X11; CrOS x86_64 14324.80.0) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/97.0.4692.102 Safari/537.36"
@@ -126,7 +126,7 @@ def parse_links(url, target):
     return links
 
 
-def store_underpants(underpants, target):
+def store_urls(urls, target):
     folder = f"{os.getcwd()}/{FOLDER}"
     filename = f"{folder}/{return_filename(target)}"
     folder_exists = os.path.exists(folder)
@@ -135,7 +135,7 @@ def store_underpants(underpants, target):
         os.mkdir(folder)
 
     with open(filename, "w") as f:
-        f.write(str(underpants))
+        f.write(str(urls))
 
 
 def is_collected(target):
@@ -161,20 +161,20 @@ def return_filename(target):
         return f"{netloc}"
 
 
-def collect_underpants(target):
+def gather_urls(target):
 
     if not is_url_valid(target):
         errmsg = f"Input URL should match regex {FORMAT}"
         raise ValueError(errmsg)
 
     if is_collected(target):
-        errmsg = "These underpants have already been collected!"
+        errmsg = "The site URLs have already been collected!"
         raise FileExistsError(errmsg)
 
     links = set()
     urls = parse_links(target, target)
 
-    def gnomes(urls):
+    def finder(urls):
 
         if urls.issubset(links):
             return
@@ -185,12 +185,12 @@ def collect_underpants(target):
 
         temp = set()
         temp.update(links)
-        gnomes(temp)
+        finder(temp)
 
-    gnomes(urls)
+    finder(urls)
 
     if len(links) > 0:
-        store_underpants(links, target)
+        store_urls(links, target)
         return links
     else:
         errmsg = "No additional links were discovered!"
@@ -202,4 +202,4 @@ if __name__ == "__main__":
     parser.add_argument("url")
     args = parser.parse_args()
     url = args.url
-    collect_underpants(url)
+    gather_urls(url)
