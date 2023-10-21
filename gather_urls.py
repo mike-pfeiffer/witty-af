@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 gather_urls.py gathers more URLs from a single seed URL.
 Copyright (C) 2022 Mike Pfeiffer

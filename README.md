@@ -36,8 +36,7 @@ pip install -r requirements.txt
 The primary function in gather_urls.py is gather_urls(). The function
 takes one argument: a valid URL. All supporting functions are called as a result of
 running gather_urls(). If used in other applications, this would be the
-function to import. A simple argparse has been written in __main__ and a shebang for
-Python3 is included in the file.
+function to import. A simple argparse has been written in __main__ and will be extended in the future.
 
 ### Basic Usage
 
